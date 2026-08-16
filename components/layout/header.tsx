@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Menu, X } from 'lucide-react';
+import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 import { navLinks } from '@/lib/data';
 
 export function Header() {
@@ -23,6 +24,7 @@ export function Header() {
   }, [pathname]);
 
   const isHome = pathname === '/';
+  const solid = scrolled || !isHome;
 
   return (
     <>
@@ -30,31 +32,22 @@ export function Header() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || !isHome
             ? 'bg-white shadow-[0_2px_12px_rgba(16,35,63,0.08)]'
-            : 'bg-gradient-to-b from-[#10233F]/60 to-transparent'
+            : 'bg-gradient-to-b from-[#003D73]/75 via-[#003D73]/35 to-transparent'
         }`}
       >
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-8 h-[84px] flex items-center justify-between">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-8 h-[88px] sm:h-[104px] lg:h-[128px] flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <span className="w-11 h-11 rounded-full bg-fumablac-blue flex items-center justify-center text-white text-lg">
-              <Heart className="w-5 h-5" fill="white" />
-            </span>
-            <span className="leading-tight">
-              <span
-                className={`font-heading text-2xl font-bold block transition-colors ${
-                  scrolled || !isHome ? 'text-fumablac-blue' : 'text-white'
-                }`}
-              >
-                FUMABLAC
-              </span>
-              <span
-                className={`text-[11px] tracking-wide uppercase transition-colors ${
-                  scrolled || !isHome ? 'text-fumablac-text-muted' : 'text-white/70'
-                }`}
-              >
-                Fundación Mamá Blanca
-              </span>
-            </span>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src={solid ? '/assets/logo-fumablac-trim.png' : '/assets/logo-fumablac-white.png'}
+              alt="Logo Fundación Mamá Blanca"
+              width={913}
+              height={561}
+              className={`h-[60px] sm:h-[76px] lg:h-[100px] w-auto object-contain transition-all duration-300 ${
+                solid ? '' : 'drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]'
+              }`}
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -115,7 +108,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white pt-[84px]"
+            className="fixed inset-0 z-40 bg-white pt-[88px] sm:pt-[104px]"
           >
             <nav className="flex flex-col items-center gap-6 py-12 text-lg font-medium">
               {navLinks?.map((link: any) => (

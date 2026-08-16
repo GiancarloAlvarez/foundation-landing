@@ -1,50 +1,64 @@
 # Dependencies
-node_modules/
+node_modules
+.pnp
+.pnp.js
+.yarn/install-state.gz
 
-# Next.js build output
+# Testing
+coverage
+
+# Next.js
 .next/
-.build/
 out/
+dist
+dist-ssr
+build
 
 # Production
-build/
-dist/
-
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# TypeScript cache
 *.tsbuildinfo
-tsconfig.tsbuildinfo
+next-env.d.ts
 
-# OS files
+# Misc
 .DS_Store
-Thumbs.db
+*.pem
 
-# Editor/IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Debug logs
+# Debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# Yarn
-.yarn/install-state.gz
-
-# Deployment artifacts
-.deploy/
-
-# Prisma generated client
-prisma/generated/
+# Local env files
+.env
+.env*.local
 
 # Vercel
-.vercel/
+.vercel
 
-# Testing coverage
-coverage/
+# Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs
+logs
+*.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+prisma/*.db
+prisma/*.db-journal
+
+# Documentos internos
+STYLE_GUIDE.md
+audit-dependencias.md

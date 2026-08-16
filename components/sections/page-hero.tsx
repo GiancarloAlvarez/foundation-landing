@@ -14,7 +14,7 @@ interface PageHeroProps {
 
 export function PageHero({ image, imageAlt, subtitle, title, breadcrumb }: PageHeroProps) {
   return (
-    <section className="relative h-[320px] lg:h-[360px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[380px] lg:h-[440px] pt-[88px] sm:pt-[104px] lg:pt-[128px] flex items-center justify-center overflow-hidden">
       <Image
         src={image}
         alt={imageAlt}

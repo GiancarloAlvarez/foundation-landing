@@ -46,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
       <head>
+        <script src="https://apps.abacus.ai/chatllm/appllm-lib.js" />
       </head>
       <body className="font-body antialiased">
         <Header />

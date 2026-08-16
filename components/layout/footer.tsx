@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Heart, MapPin, Phone, Mail, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import Image from 'next/image';
+import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -8,12 +9,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-10 h-10 rounded-full bg-fumablac-gold flex items-center justify-center text-white">
-                <Heart className="w-5 h-5" fill="white" />
-              </span>
-              <span className="font-heading text-xl font-bold">FUMABLAC</span>
-            </div>
+            <Image
+              src="/assets/logo-fumablac-white.png"
+              alt="Logo Fundación Mamá Blanca"
+              width={913}
+              height={561}
+              className="h-[72px] sm:h-[88px] lg:h-[100px] w-auto object-contain mb-5"
+            />
             <p className="text-white/60 text-sm leading-relaxed">
               Fundación Mamá Blanca. Trabajamos por el bienestar de las comunidades más vulnerables de República Dominicana con amor y compromiso.
             </p>

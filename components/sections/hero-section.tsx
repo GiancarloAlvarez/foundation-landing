@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Heart, ChevronDown, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import { ChevronDown, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -27,7 +27,7 @@ export function HeroSection() {
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#10233F]/80 via-[#10233F]/60 to-[#10233F]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#003D73]/80 via-[#003D73]/60 to-[#003D73]/85" />
       </div>
 
       {/* Social sidebar - desktop only */}
@@ -51,15 +51,22 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 lg:px-8 max-w-[860px]">
-        <motion.span
+        <motion.div
           custom={0}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/15 backdrop-blur border border-white/30 text-white text-3xl mb-6"
+          className="mb-6 flex justify-center"
         >
-          <Heart className="w-8 h-8" fill="white" />
-        </motion.span>
+          <Image
+            src="/assets/logo-fumablac-white.png"
+            alt="Logo Fundación Mamá Blanca"
+            width={913}
+            height={561}
+            className="h-[104px] sm:h-[132px] lg:h-[160px] w-auto object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.35)]"
+            priority
+          />
+        </motion.div>
 
         <motion.p
           custom={1}
