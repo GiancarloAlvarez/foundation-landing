@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { navLinks } from '@/lib/data';
+import { Container } from '@/components/layouts/container';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,11 +33,11 @@ export function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || !isHome
-            ? 'bg-white shadow-[0_2px_12px_rgba(16,35,63,0.08)]'
-            : 'bg-gradient-to-b from-[#003D73]/75 via-[#003D73]/35 to-transparent'
+            ? 'bg-white dark:bg-gray-900 shadow-[0_2px_12px_rgba(16,35,63,0.08)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.4)]'
+            : 'bg-gradient-to-b from-[#003D73]/75 via-[#003D73]/[35%] to-transparent'
         }`}
       >
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-8 h-[88px] sm:h-[104px] lg:h-[128px] flex items-center justify-between">
+        <Container className="h-[88px] sm:h-[104px] lg:h-[128px] flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
@@ -61,10 +63,10 @@ export function Header() {
                   className={`relative py-1 transition ${
                     isActive
                       ? scrolled || !isHome
-                        ? 'text-fumablac-blue font-semibold'
+                        ? 'text-fumablac-blue dark:text-blue-400 font-semibold'
                         : 'text-white font-semibold'
                       : scrolled || !isHome
-                      ? 'text-fumablac-text-muted hover:text-fumablac-blue'
+                      ? 'text-fumablac-text-muted dark:text-gray-400 hover:text-fumablac-blue dark:hover:text-blue-400'
                       : 'text-white hover:text-white'
                   }`}
                 >
@@ -85,19 +87,23 @@ export function Header() {
             >
               Contáctanos
             </Link>
+            <ThemeToggle className={solid ? 'text-fumablac-text-muted dark:text-gray-400 hover:text-fumablac-blue dark:hover:text-blue-400' : 'text-white'} />
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition ${
-              scrolled || !isHome ? 'text-fumablac-blue' : 'text-white'
-            }`}
-            aria-label="Menú"
-          >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+          {/* Mobile controls */}
+          <div className="lg:hidden flex items-center gap-1">
+            <ThemeToggle className={solid ? 'text-fumablac-text-muted dark:text-gray-400' : 'text-white'} />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className={`w-11 h-11 flex items-center justify-center rounded-lg transition ${
+                scrolled || !isHome ? 'text-fumablac-blue dark:text-blue-400' : 'text-white'
+              }`}
+              aria-label="Menú"
+            >
+              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </Container>
       </header>
 
       {/* Mobile overlay */}
@@ -108,17 +114,17 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white pt-[88px] sm:pt-[104px]"
+            className="fixed inset-0 z-40 bg-white dark:bg-gray-900 pt-[88px] sm:pt-[104px] overflow-y-auto"
           >
             <nav className="flex flex-col items-center gap-6 py-12 text-lg font-medium">
               {navLinks?.map((link: any) => (
                 <Link
                   key={link?.href}
                   href={link?.href ?? '/'}
-                  className={`transition ${
+                  className={`transition py-1 ${
                     pathname === link?.href
-                      ? 'text-fumablac-blue font-semibold'
-                      : 'text-fumablac-text-muted hover:text-fumablac-blue'
+                      ? 'text-fumablac-blue dark:text-blue-400 font-semibold'
+                      : 'text-fumablac-text-muted dark:text-gray-400 hover:text-fumablac-blue dark:hover:text-blue-400'
                   }`}
                   onClick={() => setMobileOpen(false)}
                 >

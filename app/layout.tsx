@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import { Header } from '@/components/layout/header';
-import { Footer } from '@/components/layout/footer';
-import { WhatsAppButton } from '@/components/layout/whatsapp-button';
+import { Toaster } from '@/components/ui/sonner';
+import { ThemeProvider } from '@/components/theme-provider';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,7 +20,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXTAUTH_URL ?? 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
   title: 'FUMABLAC — Fundación Mamá Blanca',
   description:
     'Transformando vidas con amor y compromiso. Programas de salud, educación y apoyo a la niñez en República Dominicana.',
@@ -38,21 +38,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const nonce = (await headers()).get('x-nonce') ?? undefined;
+
   return (
-    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
-      <head>
-        <script src="https://apps.abacus.ai/chatllm/appllm-lib.js" />
-      </head>
+    <html lang="es" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="font-body antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange nonce={nonce}>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

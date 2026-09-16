@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 
-type Size = 'sm' | 'md' | 'lg' | 'xl' | 'full'
+type Size = 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'brand'
 
 const sizes: Record<Size, string> = {
   sm:   'max-w-2xl',
@@ -8,10 +8,11 @@ const sizes: Record<Size, string> = {
   lg:   'max-w-6xl',
   xl:   'max-w-7xl',
   full: 'max-w-full',
+  brand: 'max-w-[1200px]',
 }
 
 export function Container({
-  children, size = 'lg', className,
+  children, size = 'brand', className,
 }: {
   children: React.ReactNode; size?: Size; className?: string
 }) {

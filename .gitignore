@@ -62,3 +62,7 @@ prisma/*.db-journal
 # Documentos internos
 STYLE_GUIDE.md
 audit-dependencias.md
+
+# Uploads de usuario (no versionar contenido subido)
+/public/uploads/*
+!/public/uploads/*/.gitkeep

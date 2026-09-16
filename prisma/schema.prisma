@@ -7,3 +7,204 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteSettings {
+  id             String   @id @default("main")
+  address        String   @default("")
+  phone          String   @default("")
+  whatsappNumber String   @default("")
+  email          String   @default("")
+  hoursWeekdays  String   @default("")
+  facebookUrl    String   @default("")
+  instagramUrl   String   @default("")
+  twitterUrl     String   @default("")
+  youtubeUrl     String   @default("")
+  updatedAt      DateTime @updatedAt
+}
+
+model AboutContent {
+  id                String   @id @default("main")
+  historyParagraph1 String   @default("")
+  historyParagraph2 String   @default("")
+  heroImage         String   @default("")
+  historyImage      String   @default("")
+  updatedAt         DateTime @updatedAt
+}
+
+model Stat {
+  id        String   @id @default(cuid())
+  icon      String
+  value     Int
+  prefix    String   @default("")
+  suffix    String   @default("")
+  label     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Activity {
+  id            String   @id @default(cuid())
+  image         String
+  category      String
+  categoryColor String   @default("blue")
+  title         String
+  date          DateTime
+  description   String
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Program {
+  id            String     @id @default(cuid())
+  slug          String     @unique
+  icon          String
+  image         String
+  title         String
+  shortDesc     String
+  fullDesc      String
+  beneficiaries String
+  category      String
+  order         Int        @default(0)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  evidences     Evidence[]
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  initials  String
+  name      String
+  role      String
+  color     String
+  photo     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Ally {
+  id        String   @id @default(cuid())
+  name      String
+  category  String
+  icon      String?
+  logo      String?
+  url       String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  src       String
+  alt       String
+  category  String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Evidence {
+  id          String   @id @default(cuid())
+  title       String
+  date        DateTime
+  programId   String?
+  program     Program? @relation(fields: [programId], references: [id], onDelete: SetNull)
+  description String
+  type        String
+  fileUrl     String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  text      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TransparencyDocument {
+  id        String   @id @default(cuid())
+  name      String
+  category  String
+  date      DateTime
+  year      Int
+  fileUrl   String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MissionValue {
+  id        String   @id @default(cuid())
+  icon      String
+  title     String
+  text      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model HistoryStat {
+  id        String   @id @default(cuid())
+  value     String
+  label     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  reason    String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model EmailRecipient {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  createdAt DateTime @default(now())
+}
+
+// Fixed rows, id is one of "confirmation" (sent to whoever submits the
+// contact form) or "notification" (sent to every EmailRecipient).
+model EmailTemplate {
+  id        String   @id
+  subject   String
+  body      String
+  updatedAt DateTime @updatedAt
+}
+
+// Holds the Microsoft refresh/access token for the Outlook mailbox that
+// sends mail. Microsoft rotates the refresh token on every use, so it lives
+// in the database (not a static .env value) and gets overwritten in place
+// each time lib/outlook-oauth.ts refreshes it.
+model OutlookMailToken {
+  id           String    @id @default("main")
+  refreshToken String
+  accessToken  String?
+  expiresAt    DateTime?
+  updatedAt    DateTime  @updatedAt
+}

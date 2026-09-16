@@ -1,14 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { MessageCircle } from 'lucide-react';
 
-export function WhatsAppButton() {
+export function WhatsAppButton({ whatsappNumber }: { whatsappNumber?: string }) {
   const [hovered, setHovered] = useState(false);
+
+  if (!whatsappNumber) return null;
 
   return (
     <a
-      href="https://wa.me/18091234567?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20FUMABLAC"
+      href={`https://wa.me/${whatsappNumber}?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20FUMABLAC`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 group"

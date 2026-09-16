@@ -37,7 +37,7 @@ export function PageHero({ image, imageAlt, subtitle, title, breadcrumb }: PageH
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className="font-heading text-white text-4xl lg:text-5xl font-bold"
+          className="font-heading text-white text-5xl lg:text-6xl font-bold tracking-tight"
         >
           {title}
         </motion.h1>

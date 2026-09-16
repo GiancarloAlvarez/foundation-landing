@@ -10,11 +10,17 @@
   "prisma": {
     "seed": "tsx --require dotenv/config scripts/safe-seed.ts"
   },
+  "overrides": {
+    "postcss": "^8.5.28",
+    "sharp": "^0.35.4"
+  },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "20.6.2",
+    "@types/nodemailer": "^8.0.1",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
-    "postcss": "8.4.30",
+    "postcss": "^8.5.28",
     "prisma": "6.7.0",
     "tailwind-merge": "2.5.2",
     "tailwindcss": "3.3.3",
@@ -25,6 +31,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.26.0",
+    "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "6.7.0",
     "@radix-ui/react-accordion": "1.2.0",
     "@radix-ui/react-alert-dialog": "1.1.1",
@@ -54,6 +61,7 @@
     "@radix-ui/react-toggle-group": "1.1.0",
     "@radix-ui/react-tooltip": "1.1.2",
     "autoprefixer": "10.4.15",
+    "bcryptjs": "^3.0.3",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "cmdk": "1.0.0",
@@ -62,19 +70,24 @@
     "embla-carousel-react": "8.3.0",
     "framer-motion": "10.18.0",
     "input-otp": "1.2.4",
+    "jose": "^6.2.10",
     "lucide-react": "0.446.0",
-    "next": "^14.2.35",
+    "next": "^15.5.21",
     "next-themes": "0.3.0",
-    "react": "18.2.0",
+    "nodemailer": "^9.1.1",
+    "react": "^18.3.1",
     "react-countup": "^6.5.3",
     "react-day-picker": "8.10.1",
-    "react-dom": "18.2.0",
+    "react-dom": "^18.3.1",
+    "react-easy-crop": "^6.2.3",
     "react-hook-form": "7.53.0",
     "react-intersection-observer": "9.8.0",
     "react-is": "18.3.1",
     "react-resizable-panels": "2.1.3",
+    "sharp": "^0.35.4",
     "sonner": "1.5.0",
-    "vaul": "0.9.9"
+    "vaul": "0.9.9",
+    "zod": "^3.23.8"
   },
   "browserslist": [
     "ie >= 11",

@@ -34,6 +34,28 @@ html {
     --radius: 0.75rem;
   }
 
+  .dark {
+    --background: 222 20% 9%;
+    --foreground: 210 20% 92%;
+    --card: 222 18% 13%;
+    --card-foreground: 210 20% 92%;
+    --popover: 222 18% 13%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 207 90% 58%;
+    --primary-foreground: 222 20% 9%;
+    --secondary: 37 80% 60%;
+    --secondary-foreground: 222 20% 9%;
+    --muted: 222 15% 18%;
+    --muted-foreground: 215 15% 65%;
+    --accent: 33 85% 60%;
+    --accent-foreground: 222 20% 9%;
+    --destructive: 4 75% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 15% 22%;
+    --input: 222 15% 22%;
+    --ring: 207 90% 58%;
+  }
+
   * {
     @apply border-border;
   }
@@ -46,5 +68,10 @@ html {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .hero-gradient {
+    background: radial-gradient(circle at 20% 20%, rgba(214, 151, 61, 0.25), transparent 45%),
+      linear-gradient(135deg, #003D73 0%, #005BA9 60%, #003D73 100%);
   }
 }
