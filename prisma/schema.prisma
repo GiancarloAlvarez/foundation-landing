@@ -197,10 +197,9 @@ model EmailTemplate {
   updatedAt DateTime @updatedAt
 }
 
-// Holds the Microsoft refresh/access token for the Outlook mailbox that
-// sends mail. Microsoft rotates the refresh token on every use, so it lives
-// in the database (not a static .env value) and gets overwritten in place
-// each time lib/outlook-oauth.ts refreshes it.
+// Deprecated: the site sends mail through a standard SMTP relay (Brevo), so
+// no Microsoft tokens are stored anymore. The model is kept — and left
+// empty — as a rollback option for the Outlook OAuth2 flow.
 model OutlookMailToken {
   id           String    @id @default("main")
   refreshToken String

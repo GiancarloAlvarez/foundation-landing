@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { prisma } from '../lib/db';
+import { EMAIL_TEMPLATE_DEFAULTS } from '../lib/email-templates';
 
 async function seedAdmin() {
   const email = process.env.SEED_ADMIN_EMAIL;
@@ -309,9 +310,23 @@ async function seedHistoryStats() {
   }
 }
 
+// The transactional emails only fire when a template row exists, and
+// `sendContactNotifications` silently skips the ones that are missing — so
+// they are seeded here instead of relying on someone opening the admin page.
+async function seedEmailTemplates() {
+  for (const [id, template] of Object.entries(EMAIL_TEMPLATE_DEFAULTS)) {
+    await prisma.emailTemplate.upsert({
+      where: { id },
+      update: {},
+      create: { id, subject: template.subject, body: template.body },
+    });
+  }
+}
+
 async function main() {
   await seedAdmin();
   await seedSettings();
+  await seedEmailTemplates();
   await seedStats();
   await seedActivities();
   await seedPrograms();

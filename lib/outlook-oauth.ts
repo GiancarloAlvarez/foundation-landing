@@ -1,3 +1,10 @@
+/**
+ * @deprecated Left unused since the migration to Brevo (standard SMTP).
+ * It is kept only as a rollback option: to go back to the Outlook OAuth2
+ * flow, restore the import in `lib/mail.ts` and the `OUTLOOK_*` variables in
+ * `.env`. The `OutlookMailToken` table still exists (inert) for the same
+ * reason.
+ */
 import { prisma } from '@/lib/db';
 
 const TOKEN_ID = 'main';
